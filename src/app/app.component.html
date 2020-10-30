@@ -1,6 +1,5 @@
+<h2>My User Book</h2>
 
-<div >
-	<div class="alert alert-primary" role="alert">
-		A simple primary alert—check it out!
-	  </div>
-</div>
+<app-user-entry (newUser)="processUser($event)"></app-user-entry>
+<app-user *ngFor="let p of users" [user]="p" (deleteUser)="delete($event)"></app-user>
+
