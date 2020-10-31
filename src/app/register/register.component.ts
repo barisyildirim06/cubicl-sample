@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../model'
 import {DatabaseService} from '../services/db.service'
+import { AlertifyService } from '../services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,11 @@ import {DatabaseService} from '../services/db.service'
 export class RegisterComponent implements OnInit {
 	@ViewChild('form')form:NgForm;
 
-	constructor(private dbService:DatabaseService){}
+	constructor(
+		private dbService:DatabaseService,
+		private alertify: AlertifyService
+	){}
+
 
 	users: User[]=[];
 
@@ -31,11 +36,11 @@ export class RegisterComponent implements OnInit {
 		let user: User;
 		user = this.form.value;
 		if(this.users.find(x=> x.username == user.username)){
-			alert("user zaten kayıtlı")
+			this.alertify.error("user already registered")
 		}else {
 			this.dbService.saveUser(user)
 			.then(()=>{
-				console.log('Saved!')
+				this.alertify.success("user registeration is successful")
 				this.users.push(user);
 			})
 			.catch((err)=>{

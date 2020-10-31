@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../model'
 import {DatabaseService} from '../services/db.service'
+import { AlertifyService } from '../services/alertify.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,10 @@ import {DatabaseService} from '../services/db.service'
 export class LoginComponent implements OnInit {
 	@ViewChild('form')form:NgForm;
 
-	constructor(private dbService:DatabaseService){}
+	constructor(
+		private dbService:DatabaseService,
+		private alertify: AlertifyService
+	){}
 
 	users: User[]=[];
 
@@ -32,12 +37,12 @@ export class LoginComponent implements OnInit {
 		user = this.form.value;
 		if(this.users.find(x=> x.username == user.username)){
 			if(this.users.find(x=> x.username == user.username).password == user.password){
-				alert("login successful")
+				this.alertify.success("login successful")
 			}else {
-				alert("check your password again")
+				this.alertify.error("check your password again")
 			}
 		}else {
-			alert("there is no such user")
+			this.alertify.error("there is no such user")
 		}
 	}
 }
