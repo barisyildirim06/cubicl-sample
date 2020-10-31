@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { AccountService } from './services/account.service';
+import { LoginGuard } from './login/login.guard';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AccountService } from './services/account.service';
 	providers: [
 		DatabaseService,
 		AlertifyService,
-		AccountService
+		AccountService,
+		LoginGuard
 	],
 	bootstrap: [AppComponent]
 })
