@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 		if(this.users.find(x=> x.username == user.username)){
 			if(this.users.find(x=> x.username == user.username).password == user.password){
 				this.accountService.login(user);
-				this.alertify.success("login successful")
 			}else {
 				this.alertify.error("check your password again")
 			}

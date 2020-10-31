@@ -15,9 +15,9 @@ export class AccountService {
 
 	loggedIn = false;
 	login(user:User){
+		this.alertify.success("login successful")
 		this.loggedIn = true;
 		localStorage.setItem("isLogged", user.username)
-		console.log("local storage added")
 	}
 	
 	isLoggedIn(){
@@ -25,6 +25,7 @@ export class AccountService {
 	}
 
 	logOut(){
+		this.alertify.success("logout successful")
 		localStorage.removeItem("isLogged");
 		this.loggedIn = false;
 	}

@@ -1,28 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="">Navbar</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
+	<a class="navbar-brand" href="#">Bank Account</a>
+	<ul class="navbar-nav mr-auto">
 		<li class="nav-item active">
 			<a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link" routerLink="/register">
-				<div>register</div>
-			</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" routerLink="/login">
-				<div>login</div>
-			</a>
-		</li>
-		<li class="nav-item">
+		<li class="nav-item active">
 			<a class="nav-link" routerLink="/users">
-				<div>users</div>
+				Users
 			</a>
 		</li>
-		</ul>
-	</div>
+	</ul>
+	<!-- If user is Logged in, Log out route will be shown-->
+	<!-- If user is not Logged in, Login route will be shown-->
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item active">
+			<a *ngIf="isLoggedIn()==false" class="nav-link" routerLink="/login">
+				Login
+			</a>
+			<a *ngIf="isLoggedIn()==true" class="nav-link" routerLink="/login">
+				<div (click)="logOut()" >Log Out</div>
+			</a>
+		</li>
+	</ul>
 </nav>
+
