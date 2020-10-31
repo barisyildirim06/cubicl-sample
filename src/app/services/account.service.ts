@@ -1,24 +1,31 @@
 import { Injectable } from '@angular/core';
 import {DatabaseService} from './db.service'
 import {User} from '../model'
+import { AlertifyService } from '../services/alertify.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AccountService {
 
-	constructor(private dbService:DatabaseService){}
+	constructor(
+		private alertify: AlertifyService,
+		private dbService:DatabaseService
+		){}
 
-	users: User[]=[];
+	user: User[]=[];
 
-	ngOnInit(){
-		this.dbService.loadUsers()
-		.then((users:User[])=>{
-			console.info('Add from db :',users)
-			this.users= users;
-		})
-		.catch((err)=>{
-			console.log(err)
-		})
+	loggedIn = false;
+	login(user:User){
+		this.loggedIn = true;
+		localStorage.setItem("isLogged", user.username)
+		console.log("local storage added")
+	}
+	
+	isLoggedIn(){
+		return this.loggedIn;
+	}
+
+	logOut(){
+		localStorage.removeItem("isLogged");
+		this.loggedIn = false;
 	}
 }

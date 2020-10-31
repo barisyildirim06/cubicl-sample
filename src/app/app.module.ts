@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
+import { AccountService } from './services/account.service';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
 	],
 	providers: [
 		DatabaseService,
-		AlertifyService
+		AlertifyService,
+		AccountService
 	],
 	bootstrap: [AppComponent]
 })
