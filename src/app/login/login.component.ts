@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
 	ngOnInit(){
 		this.dbService.loadUsers()
 		.then((users:User[])=>{
-			console.info('Add from db :',users)
 			this.users= users;
 		})
 		.catch((err)=>{

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../model'
 import {DatabaseService} from '../services/db.service'
 import { AlertifyService } from '../services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
 
 	constructor(
 		private dbService:DatabaseService,
-		private alertify: AlertifyService
+		private alertify: AlertifyService,
+		private router: Router
 	){}
 
 
@@ -42,6 +44,7 @@ export class RegisterComponent implements OnInit {
 			.then(()=>{
 				this.alertify.success("user registeration is successful")
 				this.users.push(user);
+				this.router.navigate(["login"]);
 			})
 			.catch((err)=>{
 				console.error("Error",err)

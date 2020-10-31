@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import {DatabaseService} from './db.service'
 import {User} from '../model'
 import { AlertifyService } from '../services/alertify.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountService {
 
 	constructor(
 		private alertify: AlertifyService,
-		private dbService:DatabaseService
+		private router: Router
 		){}
 
 	user: User[]=[];
@@ -18,6 +18,7 @@ export class AccountService {
 		this.alertify.success("login successful")
 		this.loggedIn = true;
 		localStorage.setItem("isLogged", user.username)
+		this.router.navigate([""]);
 	}
 	
 	isLoggedIn(){
