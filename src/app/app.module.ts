@@ -3,19 +3,26 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
-import { UserEntryComponent } from './user/user-entry/user-entry.component';
 import {FormsModule} from '@angular/forms'
-import { DatabaseService } from './db.service';
+import { DatabaseService } from './services/db.service';
+import { AppRoutingModule } from './app-routing.module';
+import { RegisterComponent } from './register/register.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    UserEntryComponent
+    RegisterComponent,
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule, FormsModule
+	BrowserModule, 
+	FormsModule,
+	AppRoutingModule
   ],
   providers: [DatabaseService],
   bootstrap: [AppComponent]

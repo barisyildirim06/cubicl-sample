@@ -1,13 +1,16 @@
-<div>
-	<table>
-	  <tr>
-		<td><code>Name :</code></td>
-		<td>{{user?.username}}</td>
-	  </tr>
-	  <tr>
-		  <td><code>Phone :</code></td>
-		  <td>{{user?.password}}</td>
-		</tr>
-	</table>
+<div class="container">
+	<div *ngFor="let user of users" [user]="user" class="name-card">
+		<table >
+		  <tr>
+			<td><code>Name :</code></td>
+			<td>{{user?.username}}</td>
+		  </tr>
+		  <tr>
+			  <td><code>Password :</code></td>
+			  <td>{{user?.password}}</td>
+			</tr>
+		</table>
+		
+	</div>
 	
-  </div>
+</div>
