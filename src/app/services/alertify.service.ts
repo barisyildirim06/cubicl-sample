@@ -4,6 +4,7 @@ import * as alertify from 'alertifyjs'
 @Injectable({
 	providedIn: 'root'
 })
+// This service is created for better alert messages.
 export class AlertifyService {
 
 	constructor() { }

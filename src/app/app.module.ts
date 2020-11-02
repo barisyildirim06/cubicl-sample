@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { AccountService } from './services/account.service';
 import { LoginGuard } from './login/login.guard';
+import { AccountComponent } from './account/account.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { LoginGuard } from './login/login.guard';
 		UserComponent,
 		RegisterComponent,
 		NavbarComponent,
-		LoginComponent
+		LoginComponent,
+		AccountComponent
 	],
 	imports: [
 		BrowserModule, 

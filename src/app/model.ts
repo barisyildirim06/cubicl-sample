@@ -6,11 +6,10 @@ export interface User{
 export interface Account{
 	username?: string;
 	accountName?: string;
-	openingAmount?: number;
 	amount?: number;
 	currency?: string;
 	interestRate?: number;
-	timestamp?: string;
+	timestamp?: number;
 }
 
 export interface Currency{

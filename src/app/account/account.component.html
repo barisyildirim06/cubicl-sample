@@ -1,0 +1,34 @@
+<div class="container">
+	<h1>Account Page</h1>
+	<h1 *ngIf="isEmpty()==true">You Have no Account</h1>
+	<h1 *ngIf="isEmpty()==false">You already have Account</h1>
+	<form #form="ngForm" (ngSubmit)="accountForm()">
+		<div class="form-group">
+			<label >Username</label>
+			<input type="text" class="form-control" name="username" ngModel={{loggedUser}} required disabled>
+		</div>
+		<div class="form-group">
+			<label >Account Name</label>
+			<input type="text" class="form-control" name="accountName" placeholder="Account Name" ngModel required>
+		</div>
+		<div class="form-group">
+			<!-- If there is no account, Amout will be automatically 10000 and this cannot be change -->
+			<label >Amount</label>
+			<input *ngIf="isEmpty()==true" type="text" class="form-control" name="amount" ngModel=10000 disabled required>
+			<input *ngIf="isEmpty()==false" type="number" class="form-control" name="amount" placeholder="Write any amount" ngModel required>
+		</div>
+		<div class="form-group">
+			<label >Currency</label>
+			<input type="text" class="form-control" name="currency" placeholder="Currency" ngModel required>
+		</div>
+		<div class="form-group">
+			<label >interestRate</label>
+			<input type="number" class="form-control" name="interestRate" placeholder="Intereset Rate" ngModel required>
+		</div>
+		<div class="form-group">
+			<label>Creating Day</label>
+			<input type="text" class="form-control" name="timestamp" ngModel={{dateNow|date}} required disabled>
+		</div>
+		<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+	</form>
+</div>
