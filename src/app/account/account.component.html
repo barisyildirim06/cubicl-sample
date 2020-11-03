@@ -1,34 +1,59 @@
 <div class="container">
-	<h1>Account Page</h1>
+	<h1>Reactive Account Page</h1>
 	<h1 *ngIf="isEmpty()==true">You Have no Account</h1>
 	<h1 *ngIf="isEmpty()==false">You already have Account</h1>
-	<form #form="ngForm" (ngSubmit)="accountForm()">
+	<div class="form-group" *ngIf="isEmpty()==false">
+		<label >Select Account</label>
+		<select (change)="createAccountForm()" class="custom-select custom-select-lg mb-3" [(ngModel)]="selectedAmount">
+			<option *ngFor="let account of accounts" [value]="account.amount">Account Name: {{account.accountName}}, Amount: {{account.amount}}</option>
+		</select>
+		<div class="alert alert-danger" *ngIf="selectedAmount==null">Account Name is Required</div>
+	</div>
+	<form [formGroup]="accountForm" (ngSubmit)="onFormSubmit()" class="form-group">
 		<div class="form-group">
 			<label >Username</label>
-			<input type="text" class="form-control" name="username" ngModel={{loggedUser}} required disabled>
+			<input type="text" class="form-control" name="username" value={{loggedUser}} required disabled>
 		</div>
 		<div class="form-group">
 			<label >Account Name</label>
-			<input type="text" class="form-control" name="accountName" placeholder="Account Name" ngModel required>
+			<input type="text" class="form-control" id="accountName" name="accountName" formControlName="accountName">
+			<div class="alert alert-danger" *ngIf="accountName.invalid && (accountName.touched || accountName.dirty)">Account Name is Required</div>
 		</div>
-		<div class="form-group">
-			<!-- If there is no account, Amout will be automatically 10000 and this cannot be change -->
+		<div *ngIf="isEmpty()==true" class="form-group">
 			<label >Amount</label>
-			<input *ngIf="isEmpty()==true" type="text" class="form-control" name="amount" ngModel=10000 disabled required>
-			<input *ngIf="isEmpty()==false" type="number" class="form-control" name="amount" placeholder="Write any amount" ngModel required>
+			<input  type="text" class="form-control" id="amount" name="amount" formControlName="amount" value=10000 disabled required>
+		</div>
+		<div *ngIf="isEmpty()==false" class="form-group">
+			<label >Amount</label>
+			<div *ngIf="buttonDisabled==true">
+				<input  type="number" class="form-control" id="amount" name="amount" formControlName="amount" placeholder="Select an Account before filling this" disabled required>
+			</div>
+			<div *ngIf="buttonDisabled==false">
+				<input  type="number" class="form-control" id="amount" name="amount" formControlName="amount" placeholder="Write any amount" required>
+			</div>
+			<div class="alert alert-danger" *ngIf="amount.invalid && (amount.touched || amount.dirty)" [ngClass] = "'error'">
+				<div *ngIf="amount.errors.required">
+					Amount is required.
+				</div> 
+				<div *ngIf="amount.errors.max">
+					Maximum amount is {{selectedAmount}}
+				</div> 
+			</div>
 		</div>
 		<div class="form-group">
 			<label >Currency</label>
-			<input type="text" class="form-control" name="currency" placeholder="Currency" ngModel required>
+			<input type="text" class="form-control" name="currency" formControlName="currency" placeholder="Currency" required>
+			<div class="alert alert-danger" *ngIf="currency.invalid && (currency.touched || currency.dirty)">Currency is Required</div>
 		</div>
 		<div class="form-group">
-			<label >interestRate</label>
-			<input type="number" class="form-control" name="interestRate" placeholder="Intereset Rate" ngModel required>
+			<label >interest Rate</label>
+			<input type="number" class="form-control" name="interestRate" formControlName="interestRate" placeholder="interestRate Rate" required>
+			<div class="alert alert-danger" *ngIf="interestRate.invalid && (interestRate.touched || interestRate.dirty)">Intereset Rate is Required</div>
 		</div>
 		<div class="form-group">
 			<label>Creating Day</label>
-			<input type="text" class="form-control" name="timestamp" ngModel={{dateNow|date}} required disabled>
+			<input type="text" class="form-control" name="timestamp" value={{dateNow|date}} disabled>
 		</div>
-		<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+		<button type="submit" class="btn btn-primary" >Submit</button>
 	</form>
 </div>

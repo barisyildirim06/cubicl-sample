@@ -1,20 +1,13 @@
-export interface User{
+export class User{
 	username?: string;
 	password?: string;
 }
 
-export interface Account{
+export class Account{
 	username?: string;
 	accountName?: string;
 	amount?: number;
 	currency?: string;
 	interestRate?: number;
 	timestamp?: number;
-}
-
-export interface Currency{
-	usdAsTL?: number;
-	eurAsTL?: number;
-	turkishLira?: number;
-	xauAsTL?: number;
 }
